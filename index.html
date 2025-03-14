@@ -8,8 +8,8 @@
 </head>
 <body>
 
-  <!-- Background Music with controls and preloading -->
-  <audio controls autoplay loop preload="auto">
+  <!-- Background Music (no controls visible) -->
+  <audio id="bgAudio" autoplay loop preload="auto">
     <source src="birthday-music.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
@@ -37,6 +37,24 @@
       <div class="confetti" style="left: 80%; animation-delay: 2.5s; background: #ff4d4d;"></div>
     </div>
   </div>
+
+  <script>
+    window.addEventListener('load', function() {
+      var audio = document.getElementById('bgAudio');
+      // Attempt to play the audio via JavaScript
+      var playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(function() {
+          // Audio is playing automatically.
+          console.log('Auto-play started');
+        }).catch(function(error) {
+          // Auto-play was prevented.
+          console.log('Auto-play prevented:', error);
+          // Optionally, you could display a message or trigger a manual play event
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>
