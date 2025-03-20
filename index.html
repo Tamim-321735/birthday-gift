@@ -8,11 +8,16 @@
 </head>
 <body>
 
-  <!-- Background Music (no controls visible) -->
-  <audio id="bgAudio" autoplay loop preload="auto">
+  <!-- Background Music (without controls and autoplay) -->
+  <audio id="bgAudio" loop preload="auto">
     <source src="birthday-music.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
+
+  <!-- Tap to Start Button -->
+  <button id="startAudio" style="position: absolute; top: 20px; right: 20px; padding: 10px 20px; font-size: 16px;">
+    Tap to Start Music
+  </button>
 
   <div class="container">
     <h1>🎉 Happy Birthday, Sajid! 🎂</h1>
@@ -39,20 +44,16 @@
   </div>
 
   <script>
-    window.addEventListener('load', function() {
-      var audio = document.getElementById('bgAudio');
-      // Attempt to play the audio via JavaScript
-      var playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.then(function() {
-          // Audio is playing automatically.
-          console.log('Auto-play started');
-        }).catch(function(error) {
-          // Auto-play was prevented.
-          console.log('Auto-play prevented:', error);
-          // Optionally, you could display a message or trigger a manual play event
-        });
-      }
+    // Method 1: Tap to start audio
+    document.getElementById("startAudio").addEventListener("click", function() {
+      var audio = document.getElementById("bgAudio");
+      audio.play().then(function() {
+        console.log("Audio started successfully.");
+        // Hide the start button after audio starts
+        document.getElementById("startAudio").style.display = "none";
+      }).catch(function(error) {
+        console.error("Error starting audio:", error);
+      });
     });
   </script>
 
